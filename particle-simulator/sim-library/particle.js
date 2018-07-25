@@ -1,6 +1,10 @@
 
 const INFINITY = Number.MAX_VALUE;
 
+/**
+ * Object for defining a particle by its position, velocity, radius, mass, and
+ * color.
+ */
 class Particle {
 
   constructor(x, y, vx, vy, radius, mass, color) {
@@ -14,20 +18,33 @@ class Particle {
       this.count = 0;
   }
 
-  move(dt) {
-    this.x += this.vx * dt;
-    this.y += this.vy * dt;
+  /**
+   * Gets the count of collisions this particle has undergone.
+   */
+  getCount() {
+    return this.count;
   }
 
+  /**
+   * Draws the particle at its current position
+   */
   draw() {
     fill(this.color);
     noStroke();
     ellipse(this.x, this.y, this.radius*2, this.radius*2);
   }
 
-  count() {
-    return this.count;
+  /**
+   * Moves the particle to its position after dt time.
+   */
+  move(dt) {
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
   }
+
+//
+//  CALCULATIONS FOR FINDING THE TIME TO A COLLISION
+//
 
   timeToHit(particle) {
       if (this == particle) return INFINITY;
@@ -59,6 +76,10 @@ class Particle {
     else if (this.vy < 0) return (this.radius - this.y) / this.vy;
     else return INFINITY;
   }
+
+//
+// METHODS FOR DETERMINING COLLISION RESOLUTION
+//
 
   bounceOff(particle) {
     const dx = particle.x - this.x;

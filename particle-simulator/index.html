@@ -2,13 +2,42 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>nuclear reactor</title>
-    <script src="reactor.js"></script>
-    <script src="particle.js"></script>
-    <script src="minpq.js"></script>
-    <script src="event.js"></script>
-    <script src="p5.js"></script>
+    <title>Particle Simulation</title>
+    <script src="simulation.js"></script>
+    <script src="sim-library/particle.js"></script>
+    <script src="sim-library/minpq.js"></script>
+    <script src="sim-library/event.js"></script>
+    <script src="sim-library/collisionsystem.js"></script>
+    <script src="sim-library/settings.js"></script>
+    <script src="../common/p5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
+    <div id="container">
+      <div id="simulation-selection-menu">
+        <h1>Particle Collision Simulation</h1>
+        <p>
+          This program uses an event-driven design to simulate elastic
+          collisions between particles in a container. While more complex than
+          a traditional time-driven solution, this simulation is capable of
+          processing substantially more particles and has scientific precision.
+        </p>
+        <select id="simulation-select">
+          <option value="P10">10 Particles</option>
+          <option value="P2000">2000 Particles</option>
+          <option value="BILLIARDS3">Billiards</option>
+          <option value="DIFFUSION1">Diffusion 1</option>
+          <option value="DIFFUSION2">Diffusion 2</option>
+          <option value="DIFFUSION3">Diffusion 3</option>
+        </select>
+        <button type="button" onclick="getSimulation()">Simulate!</button>
+      </div>
+      <div id="sketch-holder">
+      </div>
+      <div id="simulation-controls">
+        <p class="description">Simulation Speed: </p>
+        <input id="speed-select" type="range" name="speed" min="0" max="1" step=".05" oninput="changeSpeed()">
+      </div>
+    </div>
   </body>
 </html>
